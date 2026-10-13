@@ -25,7 +25,7 @@ def build_pipeline() -> Pipeline:
     )
 
 
-def main() -> None:
+def train() -> float:
     iris = load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
         iris.data,
@@ -46,6 +46,11 @@ def main() -> None:
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump({"model": model, "target_names": list(iris.target_names)}, MODEL_PATH)
     print(f"Saved model to {MODEL_PATH}")
+    return acc
+
+
+def main() -> None:
+    train()
 
 
 if __name__ == "__main__":
